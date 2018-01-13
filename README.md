@@ -17,20 +17,15 @@
 3.在hero.py里填写自己百度ocr的APPid</br>
 百度ocr：http://ai.baidu.com/tech/ocr/general
 
-4.连接手机<br>运行python hero.py (搜索百度的内容) <br>或test文件下的hero.py（搜素内容并统计词频）<br />
+4.连接手机<br>运行python hero.py (搜索百度的内容)# <br>或test文件下的hero.py（搜素内容并统计词频）<br />
 （只支持安卓手机）
 # 效果图
 ![截图](http://chuantu.biz/t6/198/1515261841x-1566687351.png)
-![截图](https://github.com/wuditken/MillionHeroes/blob/master/test/1.PNG?raw=true)
+#![截图](https://github.com/wuditken/MillionHeroes/blob/master/test/1.PNG?raw=true)
 
 
 一开始也想要tesseract来识别，但是经过测试太慢了要用10秒左右。
 # 大家有时间的话可以试试把它弄成全自动的
 
 有一个思路 就是把问题的选项答案也给识别出来，然后把百度搜出来的答案匹配选项答案，如果有答案直接一个模拟点击.
-
-# 交流学习（微信群）
-![截图](https://github.com/wuditken/MillionHeroes/blob/master/baiduSearch/de_qrcode.gif?raw=true)
-
-
 
