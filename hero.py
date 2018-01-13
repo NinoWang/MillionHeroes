@@ -16,12 +16,10 @@ bodys = {}
 url = host + path + '?' + querys
 '''
 """ （百度ocr）你的 APPID AK SK """
-APP_ID = '10673785'
+APP_ID = '10684531'
 API_KEY = 'FqRvrpPwhSNXt2FhT6d3dXfc'
 SECRET_KEY = 'UIu2qOPHXENScjr1yzAyXQgNkLQzkcdc'
 client = AipOcr(APP_ID, API_KEY, SECRET_KEY)
-
-
 
 im = Image.open(r"./screenshot.png")   
 
@@ -30,8 +28,21 @@ w = im.size[0]
 h = im.size[1]
 print("xx:{}".format(img_size))
 
-region = im.crop((70,200, w-70,700))    #裁剪的区域
-region.save(r"./crop_test1.png")
+# region = im.crop((70,200, w-70,700))    #裁剪的区域
+question  = im.crop((130, 600, w-130, 880)) # mi6
+question.save(r"./crop_test1.png")
+
+answer1 = im.crop((260, 960 , 860, 1110)) 
+answer1.save(r"./crop_answer1.png")
+
+answer2 = im.crop((260, 1160 , 860, 1310)) 
+answer2.save(r"./crop_answer2.png")
+
+answer3 = im.crop((260, 1360 , 860, 1510)) 
+answer3.save(r"./crop_answer3.png")
+
+answer4 = im.crop((260, 1560 , 860, 1710)) 
+answer4.save(r"./crop_answer4.png")
 
 
 
@@ -39,20 +50,15 @@ region.save(r"./crop_test1.png")
 def get_file_content(filePath):
     with open(filePath, 'rb') as fp:
         return fp.read()
-image = get_file_content(r"./crop_test1.png")
-respon = client.basicGeneral(image)   #用完500次后可改respon = client.basicAccurate(image) 
+
+question_image = get_file_content(r"./crop_test1.png")
+respon = client.basicGeneral(question_image)   #用完500次后可改respon = client.basicAccurate(image) 
 titles = respon['words_result']          #获取问题
 ans = ''
 for title in titles:
       ans = ans +title['words']
 
-tissue = ans[1:2]
-if str.isdigit(tissue):            #去掉题目索引
-     ans = ans[3:]   
-else:
-     ans = ans[2:]
-
-print(ans)       #打印问题
+print("\033[30m", ans)       #打印问题
 
 keyword = ans    #识别的问题文本
 
@@ -68,10 +74,19 @@ else:
 count = 0
 for result in results:
     #print('{0} {1} {2} {3} {4}'.format(result.index, result.title, result.abstract, result.show_url, result.url))  # 此处应有格式化输出
-	print('{0}'.format(result.abstract))  # 此处应有格式化输出
+	print("\033[31m", '{0}'.format(result.abstract))  # 此处应有格式化输出
 	count=count+1
 	if(count == 2):      #这里限制了只显示2条结果，可以自己设置
 		break
 
 end = time.time()
 print('程序用时：'+str(end-start)+'秒')
+
+## 源码中用到的代码
+# tissue = ans[1:2]
+# if str.isdigit(tissue):            #去掉题目索引
+#      ans = ans[0:]   
+# else:
+#      ans = ans[0:]
+
+##
